@@ -11,6 +11,7 @@ import Scopes from './components/scopes';
 import Destructuring from './components/destructuring';
 import Classes from './components/classes';
 import Functions from './components/functions';
+import Arrows from './components/arrows';
 
 class App extends React.Component {
   render() {
@@ -37,6 +38,7 @@ render(
         <Route path="/destructuring" component={Destructuring}></Route>
         <Route path="/classes" component={Classes}></Route>
         <Route path="/functions" component={Functions}></Route>
+        <Route path="/arrows" component={Arrows}></Route>
       </Route>
     </Router>
   ),

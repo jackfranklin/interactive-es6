@@ -22,7 +22,8 @@ export default class  extends React.Component {
     const options = {
       mode: 'javascript',
       theme: 'solarized',
-      lineNumbers: true
+      lineNumbers: true,
+      lineWrapping: true
     }
     return (
       <CodeMirror

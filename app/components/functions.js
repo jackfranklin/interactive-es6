@@ -43,7 +43,7 @@ export default class Functions extends React.Component {
         </div>
 
         <div className="col-md-12">
-          <Link className="btn btn-primary btn-lg btn-block" to= "/functions">Time for some functions...</Link>
+          <Link className="btn btn-primary btn-lg btn-block" to= "/arrows">Regular functions are dull, ready for some arrow functions?!</Link>
         </div>
       </div>
     );
