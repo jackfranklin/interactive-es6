@@ -1,16 +1,21 @@
 import React from 'react';
 import CodeMirror from 'react-codemirror';
-import 'npm:codemirror@5.8.0/mode/javascript/javascript';
 
 export default class  extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { src: 'var a = 2' };
+    this.state = { src: this.props.src }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.src !== this.state.src) {
+      this.setState({ src: newProps.src });
+    }
   }
 
   updateState(src) {
-    console.log('got new src', src);
+    this.props.updateSource(src);
   }
 
   render() {
