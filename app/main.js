@@ -8,6 +8,7 @@ import { Router, Route } from 'react-router';
 import Index from './components/index';
 
 import Scopes from './components/scopes';
+import Destructuring from './components/destructuring';
 
 class App extends React.Component {
   render() {
@@ -31,6 +32,7 @@ render(
       <Route path="" component={App}>
         <Route path="/" component={Index}></Route>
         <Route path="/scopes" component={Scopes}></Route>
+        <Route path="/destructuring" component={Destructuring}></Route>
       </Route>
     </Router>
   ),

@@ -7,7 +7,7 @@ export default class CodeResults extends React.Component {
     return ary.map(function(result) {
       return (
         <li key={result.key} className={cssClass}>
-          Expected <code>{result.key}</code> to equal <code>{result.expected}</code> and it equaled <code>{result.actual}</code>.
+          Expected <code>{result.key}</code> to equal <code>{result.expected}</code> and it equaled <code>{result.actual === undefined ? 'undefined' : result.actual}</code>.
           <span className="badge">
             { success === true ? 'Success! ' : 'Failure! ' }
           </span>
