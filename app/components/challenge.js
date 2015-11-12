@@ -50,7 +50,7 @@ export default class Challenge extends React.Component {
 
       this.setState({ evalResults: grouped });
     }).catch((err) => {
-      const name = err.name ? err.name : 'SyntaxError';
+      const name = err.name ? err.name : 'Error';
       this.setState({ codeError: `${name}: ${err.message}` })
     });
   }

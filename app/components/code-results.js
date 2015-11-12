@@ -22,8 +22,6 @@ export default class CodeResults extends React.Component {
   render() {
     if (!this.props.results) return null;
 
-    console.log('got here', this.props.results);
-
     return <ul className="list-group">{ this.renderResults() }</ul>
   }
 }

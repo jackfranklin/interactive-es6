@@ -4,7 +4,7 @@ const jack = {
   logFriends() {
     let output = [];
     // replace this function with an arrow
-    // but first: why does this code cause an error?
+    // but first: why doesn't this code work?
     this.friends.forEach(function(friend) {
       output.push(this.name + ' knows ' + friend);
     });
