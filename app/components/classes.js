@@ -22,7 +22,27 @@ export default class Classes extends React.Component {
         </div>
 
         <div className="col-md-12">
-          <Link className="btn btn-primary btn-lg btn-block" to= "/classes">Feeling keen? Up next it's classes...</Link>
+          <Challenge
+            results="classes/2.js"
+            fixture="classes/2.js"
+            title="Extending"
+          >
+            <p>Classes can extend (or inherit from) others, although you should do this with caution.</p>
+          </Challenge>
+        </div>
+
+        <div className="col-md-12">
+          <Challenge
+            results="classes/3.js"
+            fixture="classes/3.js"
+            title="Regular Objects"
+          >
+            <p>Remember, classes are just regular JS objects.</p>
+          </Challenge>
+        </div>
+
+        <div className="col-md-12">
+          <Link className="btn btn-primary btn-lg btn-block" to= "/functions">Time for some functions...</Link>
         </div>
       </div>
     );
