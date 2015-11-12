@@ -17,14 +17,21 @@ import Functions from './components/functions';
 import Arrows from './components/arrows';
 import Promises from './components/promises';
 
+import Username from './components/username';
+
 class App extends React.Component {
   render() {
     return (
       <div className="container">
         <div className="row">
-          <h1>ES6 Workshop</h1>
-          <hr />
+          <div className="col-md-3">
+            <h1>ES6 Workshop</h1>
+          </div>
+          <div className="col-md-9">
+            <Username />
+          </div>
         </div>
+        <hr />
         <div>
           { this.props.children }
         </div>
