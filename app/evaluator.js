@@ -1,58 +1,77 @@
 import babel from 'babel';
 
+import getJsonCode from './evaluator-get-json.js!text';
+
 const Evaluator = {
   run(code, expected) {
     const transpiled = this.transpile(code);
 
     if (transpiled.error) {
-      return {
+      return Promise.reject({
         error: true,
         message: transpiled.error
-      }
+      })
     }
 
     const actual = this.execute(transpiled.code);
 
     if (actual.error) {
-      return {
+      return Promise.reject({
         error: true,
         message: actual.error
-      }
+      })
     }
 
     if (expected) {
       const results = this.checkResults(actual.actual, expected);
 
-      return results;
+      return results.then((promises) => {
+        return Promise.all(promises).then((outcomes) => {
+          return outcomes;
+        });
+      });
+
     } else {
-      return {
+      return Promise.resolve({
         passed: [],
         failed: []
-      }
+      });
     }
   },
 
   checkResults(actual, expected) {
-    let result = {
+    return Promise.resolve({
       passed: [],
       failed: []
-    }
+    }).then((result) => {
+      return Object.keys(expected).map(function(key) {
+        const expectedVal = expected[key];
+        const actualVal = actual[key];
 
-    Object.keys(expected).forEach(function(key) {
-      const expectedVal = expected[key];
-      const actualVal = actual[key];
-      if (actualVal == expectedVal) {
-        result.passed.push({ key, expected: expectedVal, actual: actualVal });
-      } else {
-        result.failed.push({ key, expected: expectedVal, actual: actualVal });
-      }
+        if (actualVal && actualVal.then) {
+          return actualVal.then((resolvedVal) => {
+            return {
+              key,
+              expected: expectedVal,
+              actual: resolvedVal,
+              success: resolvedVal == expectedVal
+            }
+          });
+        } else {
+          // not a promise, but pretend it is
+          return Promise.resolve({
+            key,
+            expected: expectedVal,
+            actual: actualVal,
+            success: actualVal == expectedVal
+          });
+        }
+      });
     });
-
-    return result;
   },
 
   execute(transpiled) {
-    const codeToRun = `${transpiled} return result`;
+    const codeToRun = `${getJsonCode}\n${transpiled} return result`;
     let result = { error: false, actual: undefined };
     try {
       result.actual = new Function(codeToRun)();

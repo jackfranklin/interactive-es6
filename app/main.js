@@ -1,4 +1,7 @@
 import 'fetch'
+import promise from 'es6-promise';
+promise.polyfill();
+
 import 'npm:codemirror@5.8.0/mode/javascript/javascript';
 
 import { render } from 'react-dom';
@@ -12,6 +15,7 @@ import Destructuring from './components/destructuring';
 import Classes from './components/classes';
 import Functions from './components/functions';
 import Arrows from './components/arrows';
+import Promises from './components/promises';
 
 class App extends React.Component {
   render() {
@@ -39,6 +43,7 @@ render(
         <Route path="/classes" component={Classes}></Route>
         <Route path="/functions" component={Functions}></Route>
         <Route path="/arrows" component={Arrows}></Route>
+        <Route path="/promises" component={Promises}></Route>
       </Route>
     </Router>
   ),

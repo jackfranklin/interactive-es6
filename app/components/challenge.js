@@ -40,11 +40,19 @@ export default class Challenge extends React.Component {
   evaluateCode(e) {
     e.preventDefault();
     const result = Evaluator.run(this.state.src, this.state.results);
-    if (result.error) {
-      this.setState({ codeError: result.message });
-    } else {
-      this.setState({ evalResults: result });
-    }
+    Evaluator.run(this.state.src, this.state.results).then((results) => {
+      let grouped = { passed: [], failed: [] }
+
+      results.forEach((res) => {
+        if (res.success === false) grouped.failed.push(res);
+        if (res.success) grouped.passed.push(res);
+      });
+
+      this.setState({ evalResults: grouped });
+    }).catch((err) => {
+      const name = err.name ? err.name : 'SyntaxError';
+      this.setState({ codeError: `${name}: ${err.message}` })
+    });
   }
 
   renderError() {

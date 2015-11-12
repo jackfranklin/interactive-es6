@@ -46,7 +46,7 @@ export default class Arrows extends React.Component {
         </div>
 
         <div className="col-md-12">
-          <Link className="btn btn-primary btn-lg btn-block" to= "/arrows">Regular functions are dull, ready for some arrow functions?!</Link>
+          <Link className="btn btn-primary btn-lg btn-block" to= "/promises">Ready to move on? I <em>promise</em> it's nearly over...</Link>
         </div>
       </div>
     );

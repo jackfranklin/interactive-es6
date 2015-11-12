@@ -15,6 +15,7 @@
   },
   "jspm": {
     "dependencies": {
+      "es6-promise": "npm:es6-promise@^3.0.2",
       "fetch": "npm:whatwg-fetch@^0.10.1",
       "react": "npm:react@^0.14.2",
       "react-codemirror": "npm:react-codemirror@^0.2.0",

@@ -17,6 +17,7 @@ System.config({
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
+    "es6-promise": "npm:es6-promise@3.0.2",
     "fetch": "npm:whatwg-fetch@0.10.1",
     "react": "npm:react@0.14.2",
     "react-codemirror": "npm:react-codemirror@0.2.0",
@@ -93,6 +94,9 @@ System.config({
       "jstransform": "npm:jstransform@10.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "through": "npm:through@2.3.8"
+    },
+    "npm:es6-promise@3.0.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:esprima-fb@13001.1001.0-dev-harmony-fb": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
