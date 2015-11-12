@@ -10,6 +10,7 @@ import Index from './components/index';
 import Scopes from './components/scopes';
 import Destructuring from './components/destructuring';
 import Classes from './components/classes';
+import Functions from './components/functions';
 
 class App extends React.Component {
   render() {
@@ -29,12 +30,13 @@ class App extends React.Component {
 
 render(
   (
-    <Router>
+    <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Route path="" component={App}>
         <Route path="/" component={Index}></Route>
         <Route path="/scopes" component={Scopes}></Route>
         <Route path="/destructuring" component={Destructuring}></Route>
         <Route path="/classes" component={Classes}></Route>
+        <Route path="/functions" component={Functions}></Route>
       </Route>
     </Router>
   ),
