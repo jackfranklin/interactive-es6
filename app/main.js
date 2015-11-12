@@ -9,6 +9,7 @@ import Index from './components/index';
 
 import Scopes from './components/scopes';
 import Destructuring from './components/destructuring';
+import Classes from './components/classes';
 
 class App extends React.Component {
   render() {
@@ -33,6 +34,7 @@ render(
         <Route path="/" component={Index}></Route>
         <Route path="/scopes" component={Scopes}></Route>
         <Route path="/destructuring" component={Destructuring}></Route>
+        <Route path="/classes" component={Classes}></Route>
       </Route>
     </Router>
   ),

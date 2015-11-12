@@ -60,7 +60,7 @@ export default class Destructuring extends React.Component {
         </div>
 
         <div className="col-md-12">
-          <Link className="btn btn-primary btn-lg btn-block" to= "/destructuring">Ready to move on? Let's talk destructuring...</Link>
+          <Link className="btn btn-primary btn-lg btn-block" to= "/classes">Feeling keen? Up next it's classes...</Link>
         </div>
       </div>
     );
