@@ -19,6 +19,8 @@ import Promises from './components/promises';
 
 import Username from './components/username';
 
+import Dashboard from './components/dashboard';
+
 
 const titleCase = (str) => {
   return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -66,6 +68,7 @@ render(
     <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Route path="" component={App}>
         <Route path="/" component={Index}></Route>
+        <Route path="/_dashboard" component={Dashboard}></Route>
         <Route path="/scopes" component={Scopes}></Route>
         <Route path="/destructuring" component={Destructuring}></Route>
         <Route path="/classes" component={Classes}></Route>
