@@ -6,7 +6,7 @@ import 'npm:codemirror@5.8.0/mode/javascript/javascript';
 
 import { render } from 'react-dom';
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { Router, Route, Link } from 'react-router';
 
 import Index from './components/index';
 
@@ -19,20 +19,41 @@ import Promises from './components/promises';
 
 import Username from './components/username';
 
+
+const titleCase = (str) => {
+  return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+};
+
 class App extends React.Component {
+
+  challengeLinks() {
+    return ['scopes', 'destructuring',
+      'classes', 'functions',
+      'arrows', 'promises'].map((feat) => {
+        return <li key={feat}><Link to={`/${feat}`}>{titleCase(feat)}</Link></li>;
+      });
+  }
+
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
-            <h1>ES6 Workshop</h1>
-          </div>
-          <div className="col-md-9">
+      <div>
+        <nav className="navbar navbar-default">
+          <div className="container">
+            <div className="navbar-header">
+              <a className="navbar-brand" href="#">ES6 Workshop</a>
+            </div>
+
             <Username />
+
+            <div>
+              <ul className="nav navbar-nav">
+                { this.challengeLinks() }
+              </ul>
+            </div>
+
           </div>
-        </div>
-        <hr />
-        <div>
+        </nav>
+        <div className="container">
           { this.props.children }
         </div>
       </div>

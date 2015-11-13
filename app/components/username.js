@@ -18,14 +18,11 @@ export default class Username extends React.Component {
 
   render() {
     return (
-      <form className="form-inline username-form" onSubmit={(e) => this.submitName(e) }>
+      <form className="navbar-form navbar-left" onSubmit={(e) => this.submitName(e) }>
         <div className="form-group">
-          <div className="input-group">
-            <div className="input-group-addon">Name</div>
-            <input placeholder="Jack" className="form-control" type="text" value={this.state.username} onChange={(e) => this.updateName(e)} />
-          </div>
+          <input placeholder="Your Name" className="form-control" type="text" value={this.state.username} onChange={(e) => this.updateName(e)} />
         </div>
-        <button type="submit" className="btn btn-primary">Save</button>
+        <button type="submit" className="btn btn-default">Save</button>
       </form>
     )
   }
