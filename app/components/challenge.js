@@ -1,11 +1,13 @@
 import React from 'react';
 
-import Editor from './editor';
-
 import Evaluator from '../evaluator';
+import Editor from './editor';
 
 import CodeResults from './code-results';
 import ExpectedResult from './expected-result';
+
+import store from 'store';
+import pusher from '../pusher';
 
 export default class Challenge extends React.Component {
   constructor(props) {
@@ -13,6 +15,7 @@ export default class Challenge extends React.Component {
     this.state = {
       src: 'Loading...',
       codeError: false,
+      evaluationLogResults: []
     };
   }
 
@@ -26,6 +29,8 @@ export default class Challenge extends React.Component {
         this.updateResults(data.result);
       });
     }
+
+    this.channel = pusher.subscribe('private-help-pings');
   }
 
   updateResults(results) {
@@ -48,10 +53,26 @@ export default class Challenge extends React.Component {
         if (res.success) grouped.passed.push(res);
       });
 
-      this.setState({ evalResults: grouped });
+      this.setState({
+        evalResults: grouped,
+        evaluationLogResults: this.state.evaluationLogResults.concat([grouped]),
+      });
     }).catch((err) => {
       const name = err.name ? err.name : 'Error';
-      this.setState({ codeError: `${name}: ${err.message}` })
+      this.setState({
+        codeError: `${name}: ${err.message}`,
+        evaluationLogResults: this.state.evaluationLogResults.concat([err]),
+      })
+    });
+  }
+
+  handleHelp(e) {
+    e.preventDefault();
+    this.channel.trigger('client-new-help', {
+      user: store.get('username'),
+      challenge: this.props.fixture,
+      log: this.state.evaluationLogResults,
+      src: this.state.src,
     });
   }
 
@@ -90,6 +111,11 @@ export default class Challenge extends React.Component {
           { this.renderError() }
           { this.props.results && <ExpectedResult results={this.state.results} />}
           { this.props.results && <CodeResults results={this.state.evalResults} />}
+
+          <button
+            disabled={this.state.evaluationLogResults.length < 1}
+            className="btn btn-warning pull-right"
+            onClick={(e) => this.handleHelp(e)}>I would like some help please :)</button>
         </div>
       </div>
     );
