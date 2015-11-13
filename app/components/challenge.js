@@ -7,7 +7,8 @@ import CodeResults from './code-results';
 import ExpectedResult from './expected-result';
 
 import store from 'store';
-import pusher from '../pusher';
+
+import { subscribeToHelp, subscribeToActivity } from '../challenge-channels';
 
 import { getChallenge, saveChallenge } from '../challenge-store';
 
@@ -50,8 +51,8 @@ export default class Challenge extends React.Component {
       });
     }
 
-    this.channel = pusher.subscribe('private-help-pings');
-    this.activityChannel = pusher.subscribe('private-activity-feed');
+    this.helpChannel = subscribeToHelp();
+    this.activityChannel = subscribeToActivity();
   }
 
   updateResults(results) {
@@ -105,7 +106,7 @@ export default class Challenge extends React.Component {
 
   handleHelp(e) {
     e.preventDefault();
-    this.channel.trigger('client-new-help', {
+    this.helpChannel.trigger('client-new-help', {
       user: store.get('username'),
       challenge: this.props.fixture,
       log: this.state.evaluationLogResults,
