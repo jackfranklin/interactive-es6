@@ -31,6 +31,7 @@ export default class Challenge extends React.Component {
     }
 
     this.channel = pusher.subscribe('private-help-pings');
+    this.activityChannel = pusher.subscribe('private-activity-feed');
   }
 
   updateResults(results) {
@@ -57,12 +58,24 @@ export default class Challenge extends React.Component {
         evalResults: grouped,
         evaluationLogResults: this.state.evaluationLogResults.concat([grouped]),
       });
+
+      this.logActivity(grouped);
     }).catch((err) => {
       const name = err.name ? err.name : 'Error';
       this.setState({
         codeError: `${name}: ${err.message}`,
         evaluationLogResults: this.state.evaluationLogResults.concat([err]),
       })
+      this.logActivity(err);
+    });
+  }
+
+  logActivity(res) {
+    this.activityChannel.trigger('client-new-activity', {
+      user: store.get('username'),
+      challenge: this.props.fixture,
+      res,
+      src: this.state.src,
     });
   }
 

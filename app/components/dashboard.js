@@ -6,15 +6,21 @@ export default class Dashboard extends React.Component {
     super(props);
     this.state = {
       pingsForHelp: [],
-      activityStream: []
+      activity: []
     };
   }
 
   componentWillMount() {
     const helpChannel = pusher.subscribe('private-help-pings');
+    const activityChannel = pusher.subscribe('private-activity-feed');
+
     helpChannel.bind('client-new-help', (data) => {
       data.resolved = false;
       this.setState({ pingsForHelp: this.state.pingsForHelp.concat([data]) });
+    });
+
+    activityChannel.bind('client-new-activity', (data) => {
+      this.setState({ activity: this.state.activity.concat([data]) });
     });
   }
 
@@ -49,17 +55,42 @@ export default class Dashboard extends React.Component {
     });
   }
 
+  renderActivity() {
+    return this.state.activity.map((activity) => {
+      const wasSuccess = activity.res.error != true && activity.res.failed.length === 0;
+      return (
+        <tr key={JSON.stringify(activity.res)+activity.user}>
+          <td>{activity.user}</td>
+          <td>{activity.challenge}</td>
+          <td>{ wasSuccess ? 'Success!' : 'Fail!' }</td>
+        </tr>
+      );
+    });
+  }
+
   render() {
     return (
-      <table className="table table-striped">
-        <thead>
-          <tr><th>Name</th><th>Challenge</th><th>Attempts</th><th>Last</th><th>Resolve</th></tr>
-        </thead>
-        <tbody>
-          { this.renderRows() }
-        </tbody>
-      </table>
+      <div>
+        <h4>Pings for Help</h4>
+        <table className="table table-striped">
+          <thead>
+            <tr><th>Name</th><th>Challenge</th><th>Attempts</th><th>Last</th><th>Resolve</th></tr>
+          </thead>
+          <tbody>
+            { this.renderRows() }
+          </tbody>
+        </table>
+
+        <h4>Activity Feed</h4>
+        <table className="table table-striped">
+          <thead>
+            <tr><th>Name</th><th>Challenge</th><th>Result</th></tr>
+          </thead>
+          <tbody>
+            { this.renderActivity() }
+          </tbody>
+        </table>
+      </div>
     );
-    return <p>Hello World</p>;
   }
 }
