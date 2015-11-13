@@ -1,6 +1,7 @@
+import './css/bootstrap.min.css!';
+import 'npm:codemirror@5.8.0/lib/codemirror.css!';
+import 'npm:codemirror@5.8.0/theme/solarized.css!';
 import 'fetch'
-import promise from 'es6-promise';
-promise.polyfill();
 
 import 'npm:codemirror@5.8.0/mode/javascript/javascript';
 

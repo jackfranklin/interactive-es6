@@ -2,16 +2,6 @@
 <html>
   <head>
     <title>ES6 Workshop</title>
-    <link rel="stylesheet" type="text/css" href="/app/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/jspm_packages/npm/codemirror@5.8.0/lib/codemirror.css" />
-    <link rel="stylesheet" type="text/css" href="/jspm_packages/npm/codemirror@5.8.0/theme/solarized.css" />
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
-    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
-    <script src="app/vendor/pusher-js-client-auth.js"></script>
-    <script>
-      System.import('app/main');
-    </script>
     <style>
       .challenge.row .col-md-12 { margin-bottom: 60px; }
     </style>
@@ -20,5 +10,13 @@
     <div id="app">
       Loading...
     </div>
+
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script src="app/vendor/pusher.min.js"></script>
+    <script src="app/vendor/pusher-js-client-auth.js"></script>
+    <script id='import-script'>
+      System.import('app/main');
+    </script>
   </body>
 </html>
