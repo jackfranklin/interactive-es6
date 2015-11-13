@@ -3,6 +3,8 @@ import 'npm:codemirror@5.8.0/lib/codemirror.css!';
 import 'npm:codemirror@5.8.0/theme/solarized.css!';
 import 'fetch'
 
+import store from 'store';
+
 import 'npm:codemirror@5.8.0/mode/javascript/javascript';
 
 import { render } from 'react-dom';
@@ -27,9 +29,20 @@ const titleCase = (str) => {
   return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 };
 
+const hasEnteredName = () => !!store.get('username');
+
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { hasName: hasEnteredName() };
+  }
+
   challengeLinks() {
+    if (!this.state.hasName) {
+      return null;
+    }
+
     return ['scopes', 'destructuring',
       'classes', 'functions',
       'arrows', 'promises'].map((feat) => {
@@ -37,6 +50,17 @@ class App extends React.Component {
       });
   }
 
+  reset(e) {
+    store.clear();
+    // purposeful refresh such that all challenges get reloaded from the fixtures
+    setTimeout(() => window.location.reload());
+  }
+
+  nameSet() {
+    this.setState({ hasName: true });
+    console.log('I GOT CALLED');
+
+  }
   render() {
     return (
       <div>
@@ -46,13 +70,17 @@ class App extends React.Component {
               <a className="navbar-brand" href="#">ES6 Workshop</a>
             </div>
 
-            <Username />
+            <Username nameSetCallback={() => this.nameSet()} />
 
             <div>
               <ul className="nav navbar-nav">
                 { this.challengeLinks() }
               </ul>
             </div>
+
+            <form className="navbar-form navbar-left">
+              <button className="btn btn-default" onClick={(e) => this.reset(e) }>Reset</button>
+            </form>
 
           </div>
         </nav>

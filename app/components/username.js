@@ -4,7 +4,7 @@ import store from 'store';
 export default class Username extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: store.get('username') }
+    this.state = { username: store.get('username'), submitted: !!store.get('username') }
   }
 
   updateName(e) {
@@ -14,9 +14,12 @@ export default class Username extends React.Component {
   submitName(e) {
     e.preventDefault();
     store.set('username', this.state.username);
+    this.setState({ submitted: true });
+    console.log('got here');
+    this.props.nameSetCallback();
   }
 
-  render() {
+  renderForm() {
     return (
       <form className="navbar-form navbar-left" onSubmit={(e) => this.submitName(e) }>
         <div className="form-group">
@@ -24,6 +27,16 @@ export default class Username extends React.Component {
         </div>
         <button type="submit" className="btn btn-default">Save</button>
       </form>
-    )
+    );
+  }
+
+  renderName() {
+    return (
+      <p className="navbar-text">Signed in as: <strong>{ this.state.username }</strong></p>
+    );
+  }
+
+  render() {
+    return this.state.submitted ? this.renderName() : this.renderForm();
   }
 }

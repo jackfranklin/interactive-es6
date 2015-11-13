@@ -9,20 +9,40 @@ import ExpectedResult from './expected-result';
 import store from 'store';
 import pusher from '../pusher';
 
+import { getChallenge, saveChallenge } from '../challenge-store';
+
+const INITIAL_SOURCE = 'Loading...';
+
 export default class Challenge extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: 'Loading...',
+      src: INITIAL_SOURCE,
       codeError: false,
       evaluationLogResults: []
     };
   }
 
-  componentDidMount() {
+
+  resetFixture() {
     fetch(`app/fixtures/${this.props.fixture}`).then((response) => {
       return response.text();
-    }).then(this.updateSource.bind(this));
+    }).then((text) => this.updateSource(text));
+  }
+
+  setFixtureFromStorageOrDefault() {
+    const fromStore = getChallenge(this.props.fixture);
+
+    if (fromStore) {
+      this.updateSource(fromStore);
+    } else {
+      this.resetFixture();
+    }
+  }
+
+  componentDidMount() {
+
+    this.setFixtureFromStorageOrDefault();
 
     if (this.props.results) {
       System.import(`app/results/${this.props.results}`).then((data) => {
@@ -38,8 +58,12 @@ export default class Challenge extends React.Component {
     this.setState({ results });
   }
 
-  updateSource(src) {
+  updateSource(src, persist = false) {
     this.setState({ src, codeError: false, evalResults: null });
+
+    if (persist && src !== INITIAL_SOURCE) {
+      saveChallenge(this.props.fixture, src);
+    }
   }
 
 
@@ -112,7 +136,7 @@ export default class Challenge extends React.Component {
           <h4>{ this.props.title }</h4>
           { this.props.children }
 
-          <Editor src={this.state.src} updateSource={(src) => this.updateSource(src) } />
+          <Editor src={this.state.src} updateSource={(src) => this.updateSource(src, true) } />
           <hr />
           <button
             className="btn btn-default btn-primary"
