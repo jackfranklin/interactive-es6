@@ -11,7 +11,7 @@ export default class Arrows extends React.Component {
         <Feature feature="arrows" />
 
         <div className="col-md-12">
-          <Link className="btn btn-primary btn-lg btn-block" to= "/promises">Ready to move on? I <em>promise</em> it's nearly over...</Link>
+          <Link className="btn btn-primary btn-lg btn-block" to= "/template-strings">Let's talk strings...</Link>
         </div>
       </div>
     );

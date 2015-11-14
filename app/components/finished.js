@@ -12,6 +12,7 @@ export default class Finished extends React.Component {
         <h2>This Site</h2>
 
         <p>Is an ES6, ReactJS application <a href="https://github.com/jackfranklin/interactive-es6">that's open source.</a></p>
+        <p>I'd love some feedback on if it's any good or not...</p>
       </div>
     );
   }

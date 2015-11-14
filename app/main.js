@@ -19,6 +19,7 @@ import Classes from './components/classes';
 import Functions from './components/functions';
 import Arrows from './components/arrows';
 import Promises from './components/promises';
+import TemplateStrings from './components/template-strings';
 
 import Username from './components/username';
 import Dashboard from './components/dashboard';
@@ -46,7 +47,7 @@ class App extends React.Component {
 
     return ['scopes', 'destructuring',
       'classes', 'functions',
-      'arrows', 'promises'].map((feat) => {
+      'arrows', 'template-strings', 'promises'].map((feat) => {
         return <li key={feat}><Link to={`/${feat}`}>{titleCase(feat)}</Link></li>;
       });
   }
@@ -104,6 +105,7 @@ render(
         <Route path="/classes" component={Classes}></Route>
         <Route path="/functions" component={Functions}></Route>
         <Route path="/arrows" component={Arrows}></Route>
+        <Route path="/template-strings" component={TemplateStrings}></Route>
         <Route path="/promises" component={Promises}></Route>
         <Route path="/finished" component={Finished}></Route>
       </Route>
