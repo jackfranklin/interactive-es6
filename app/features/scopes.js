@@ -2,7 +2,7 @@ import React from 'react';
 export default [
   {
     index: 1,
-    title: 'The problem with variabes',
+    title: 'The problem with variables',
     hasResults: true,
     content: (
       <div>

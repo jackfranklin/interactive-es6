@@ -21,8 +21,9 @@ import Arrows from './components/arrows';
 import Promises from './components/promises';
 
 import Username from './components/username';
-
 import Dashboard from './components/dashboard';
+
+import Finished from './components/finished';
 
 
 const titleCase = (str) => {
@@ -104,6 +105,7 @@ render(
         <Route path="/functions" component={Functions}></Route>
         <Route path="/arrows" component={Arrows}></Route>
         <Route path="/promises" component={Promises}></Route>
+        <Route path="/finished" component={Finished}></Route>
       </Route>
     </Router>
   ),
