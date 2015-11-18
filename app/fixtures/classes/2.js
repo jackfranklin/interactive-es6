@@ -12,6 +12,4 @@ class Jack extends Person {
 
 const jack = new Jack('Jack');
 
-const result = {
-  name: jack.fullName()
-}
+assertEqual(jack.fullName(), 'Jack Franklin');

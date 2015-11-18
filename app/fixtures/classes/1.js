@@ -11,6 +11,4 @@ class Person {
 
 const jack = new Person('Jack', 'Franklin');
 
-const result = {
-  name: jack.fullName()
-}
+assertEqual(jack.fullName(), 'Jack Franklin');

@@ -7,6 +7,4 @@ class Person {
 const jack = new Person('Jack');
 jack.name = 'Bob';
 
-const result = {
-  name: jack.name
-}
+assertEqual(jack.name, 'Jack');
