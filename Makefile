@@ -2,7 +2,7 @@ build:
 	- rm -r dist/
 	mkdir -p dist/jspm_packages
 	mkdir -p dist/app/vendor
-	./node_modules/.bin/jspm bundle app/main dist/app.min.js --minify --log err
+	./node_modules/.bin/jspm bundle app/main dist/app.min.js --minify
 	cp app/vendor/*.js dist/app/vendor
 	cp service-worker.js dist
 	cp jspm_packages/system.js dist/jspm_packages

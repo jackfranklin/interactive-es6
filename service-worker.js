@@ -1,5 +1,16 @@
 this.addEventListener('install', function(event) {
-  console.log('I got installed!');
+  var promise = caches.open('v1').then(function(cache) {
+    return cache.addAll([
+      '/',
+      '/app/vendor/pusher.min.js',
+      '/app/vendor/pusher-js-client-auth.js',
+      '/jspm_packages/system.js',
+      '/config.js',
+      '/app.min.js',
+    ]);
+  });
+
+  event.waitUntil(promise);
 });
 
 this.addEventListener('activate', function(event) {
@@ -8,17 +19,9 @@ this.addEventListener('activate', function(event) {
 
 this.addEventListener('fetch', function(event) {
   console.log('I saw a fetch request', event);
-  var returnVal = caches.match(event.request).catch(function() {
-    return fetch(event.request).then(function(response) {
-      return caches.open('v1').then(function(cache) {
-        cache.put(event.request, response.clone());
-        return response;
-      });
-    });
-  }).catch(function(e) {
-    console.log('I got caught', e);
-    return new Response('Something went wrong');
+  var returnVal = caches.match(event.request).then(function(response) {
+    return response || fetch(event.request);
   });
-  console.log('got return', returnVal);
+
   event.respondWith(returnVal);
 });
