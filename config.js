@@ -19,7 +19,7 @@ System.config({
     "clean-css": "npm:clean-css@3.4.7",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.19",
-    "ecmascript-evaluator": "npm:ecmascript-evaluator@0.0.5",
+    "ecmascript-evaluator": "npm:ecmascript-evaluator@0.0.6",
     "fetch": "npm:whatwg-fetch@0.10.1",
     "pusher-js": "npm:pusher-js@3.0.0",
     "pusher-js-client-auth": "npm:pusher-js-client-auth@0.1.0",
@@ -458,7 +458,7 @@ System.config({
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "jsbn": "github:rynomad/jsbn@master"
     },
-    "npm:ecmascript-evaluator@0.0.5": {
+    "npm:ecmascript-evaluator@0.0.6": {
       "babel": "npm:babel@5.8.34",
       "babel-core": "npm:babel-core@5.8.34"
     },
@@ -1136,7 +1136,7 @@ System.config({
     "npm:stream-browserify@1.0.0": {
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
-      "readable-stream": "npm:readable-stream@1.0.33"
+      "readable-stream": "npm:readable-stream@1.1.13"
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
