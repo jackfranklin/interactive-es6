@@ -5,7 +5,5 @@ let myObj = {
 
 let { x, y } = myObj;
 
-var result = {
-  value: x,
-  otherValue: y
-}
+assertEqual(x, 1);
+assertEqual(y, 2);
