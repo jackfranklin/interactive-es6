@@ -5,6 +5,11 @@ const ASSERTION_ERROR_MAPS = {
     return (
       <span>Expected {valueOrUndefined(x)} to equal {valueOrUndefined(y)}</span>
     )
+  },
+  'resolvesTo': (_, y) => {
+    return (
+      <span>Expected the given promise to resolve to {valueOrUndefined(y)}</span>
+    )
   }
 };
 

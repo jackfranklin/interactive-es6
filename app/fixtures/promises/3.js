@@ -4,11 +4,10 @@ const makePromise = () => {
 
 const promiseChain = () => {
   return makePromise()
-    .then(() => 3)
-    .then(() => 4)
-    .then(() => 5);
+    // don't be put off by the arrow functions here!
+    .then((x) => x + 1)
+    .then((x) => x + 1)
+    .then((x) => x + 1);
 }
 
-const result = {
-  value: promiseChain()
-}
+assertResolvesTo(promiseChain(), 6);
