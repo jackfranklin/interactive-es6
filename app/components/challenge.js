@@ -34,7 +34,7 @@ export default class Challenge extends React.Component {
   setFixtureFromStorageOrDefault() {
     const fromStore = getChallenge(this.props.fixture);
 
-    if (fromStore && false) {
+    if (fromStore) {
       this.updateSource(fromStore);
     } else {
       this.resetFixture();
