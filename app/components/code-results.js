@@ -40,7 +40,6 @@ export default class CodeResults extends React.Component {
     return this.props.results.map(this.renderResult.bind(this));
   }
   render() {
-    console.log('renderring', this.props.results);
     if (!this.props.results) return null;
 
     return <ul className="list-group">{ this.renderResults() }</ul>

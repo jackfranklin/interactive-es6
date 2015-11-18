@@ -73,7 +73,6 @@ export default class Challenge extends React.Component {
     Evaluator.run(this.state.src).then((results) => {
       // TODO: messy
       // better if the evaluator threw on an error
-      console.log('got here', results);
       if (results[0].error) {
         const { errorType, message } = results[0];
         this.setState({
