@@ -4,7 +4,5 @@ const addThree = (x) => {
   return x + 3;
 }
 
-const result = {
-  value: addTwo(2),
-  otherValue: addThree(3)
-}
+assertEqual(addTwo(1), 4);
+assertEqual(addThree(3), 5);

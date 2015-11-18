@@ -9,6 +9,4 @@ const sumNumbers = function(...args) {
   return total;
 }
 
-const result = {
-  total: sumNumbers(1, 2, 4)
-}
+assertEqual(sumNumbers(1, 2, 4), 6);

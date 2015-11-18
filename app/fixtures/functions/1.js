@@ -9,6 +9,4 @@ const obj = {
   }
 }
 
-const result = {
-  greeting: obj.hello()
-}
+assertEqual(obj.hello(), 'hey');

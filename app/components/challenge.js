@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Evaluator from '../evaluator';
+import Evaluator from 'ecmascript-evaluator';
 import Editor from './editor';
 
 import CodeResults from './code-results';
@@ -70,28 +70,23 @@ export default class Challenge extends React.Component {
 
   evaluateCode(e) {
     e.preventDefault();
-    const result = Evaluator.run(this.state.src, this.state.results);
-    Evaluator.run(this.state.src, this.state.results).then((results) => {
-      let grouped = { passed: [], failed: [] }
+    Evaluator.run(this.state.src).then((results) => {
+      // TODO: messy
+      // better if the evaluator threw on an error
+      if (results[0].error) {
+        const { errorType, message } = results[0];
+        this.setState({
+          codeError: `${errorType}: ${message}`,
+          evaluationLogResults: this.state.evaluationLogResults.concat([results]),
+        });
+      } else {
+        this.setState({
+          evalResults: results,
+          evaluationLogResults: this.state.evaluationLogResults.concat([results])
+        });
+      }
 
-      results.forEach((res) => {
-        if (res.success === false) grouped.failed.push(res);
-        if (res.success) grouped.passed.push(res);
-      });
-
-      this.setState({
-        evalResults: grouped,
-        evaluationLogResults: this.state.evaluationLogResults.concat([grouped]),
-      });
-
-      this.logActivity(grouped);
-    }).catch((err) => {
-      const name = err.name ? err.name : 'Error';
-      this.setState({
-        codeError: `${name}: ${err.message}`,
-        evaluationLogResults: this.state.evaluationLogResults.concat([err]),
-      })
-      this.logActivity(err);
+      this.logActivity(results);
     });
   }
 
@@ -146,9 +141,9 @@ export default class Challenge extends React.Component {
             onClick={(e) => this.evaluateCode(e) }>Evaluate</button>
         </div>
         <div className="col-md-6">
+          { !this.props.results && <p>Evaluate the code to see the results</p> }
           { this.renderError() }
-          { this.props.results && <ExpectedResult results={this.state.results} />}
-          { this.props.results && <CodeResults results={this.state.evalResults} />}
+          { !this.state.codeError && <CodeResults results={this.state.evalResults} />}
 
           <button
             disabled={this.state.evaluationLogResults.length < 1}

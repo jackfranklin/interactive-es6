@@ -4,6 +4,4 @@ let myObj = {
 
 let { x } = myObj;
 
-var result = {
-  value: x,
-}
+assertEqual(x, 1);

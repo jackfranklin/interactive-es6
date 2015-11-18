@@ -1,7 +1,5 @@
 function willError() {
-  return Promise.reject('whoops!');
+  return Promise.reject('whoops!').catch(() => 'Hello');
 }
 
-const result = {
-  message: willError().catch(() => 'Hello')
-}
+assertResolvesTo(willError(), 'Hey');

@@ -3,7 +3,6 @@ export default [
   {
     index: 1,
     title: 'For small functions, arrow functions offer a cleaner syntax',
-    hasResults: true,
     content: (
       <div>
         <p>This code works as is, but study arrow functions closely! You're going to have to type out lots of them...</p>
@@ -15,12 +14,13 @@ export default [
   {
     index: 2,
     title: 'Passing in arrow functions as arguments',
-    hasResults: true,
+    content: (
+      <div><p>It's super succinct!</p></div>
+    )
   },
   {
     index: 3,
     title: 'The scope of arrow functions',
-    hasResults: true,
     content: (
       <div>
         <p>The code below logs out the wrong thing. Replace the function with an arrow function and see what happens.</p>

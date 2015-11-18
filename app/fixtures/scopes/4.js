@@ -5,6 +5,4 @@ const x = {};
 
 x.a = 3;
 
-var result = {
-  value: x.a
-}
+assertEqual(x.a, 3);

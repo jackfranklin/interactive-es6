@@ -15,6 +15,4 @@ const jack = {
   }
 }
 
-const result = {
-  friends: jack.logFriends().join(', ')
-}
+assertEqual(jack.logFriends.join(', '), 'Jack knows alice, Jack knows bob');

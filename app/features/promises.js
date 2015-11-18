@@ -3,7 +3,6 @@ export default [
   {
     index: 1,
     title: 'Promises are a nice way to deal with async things',
-    hasResults: true,
     content: (
       <div>
         <p>Here you're expected to provide a Promise that will <em>resolve</em> to the expected value</p>
@@ -14,7 +13,6 @@ export default [
   {
     index: 2,
     title: 'A promise can resolve or reject',
-    hasResults: true,
     content: (
       <div>
         <p>The promise in the code is going to reject, which means the <code>catch</code> callback will be run.</p>
@@ -27,7 +25,6 @@ export default [
   {
     index: 3,
     title: 'We can create chains of promises',
-    hasResults: true,
     content: (
       <div>
         <p>Any value returned from a <code>then</code> is wrapped in a promise.</p>

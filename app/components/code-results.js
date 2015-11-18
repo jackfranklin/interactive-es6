@@ -1,23 +1,43 @@
 import React from 'react';
 
-export default class CodeResults extends React.Component {
-  renderArray(ary, success) {
-    const cssClass = 'list-group-item list-group-item-' + (success ? 'success' : 'danger');
-
-    return ary.map(function(result) {
-      return (
-        <li key={result.key} className={cssClass}>
-          Expected <code>{result.key}</code> to equal <code>{result.expected}</code> and it equaled <code>{result.actual === undefined ? 'undefined' : result.actual}</code>.
-          <span className="badge">
-            { success === true ? 'Success! ' : 'Failure! ' }
-          </span>
-        </li>
-      )
-    });
+const ASSERTION_ERROR_MAPS = {
+  'equal': (x, y) => {
+    return (
+      <span>Expected {valueOrUndefined(x)} to equal {valueOrUndefined(y)}</span>
+    )
+  },
+  'resolvesTo': (_, y) => {
+    return (
+      <span>Expected the given promise to resolve to {valueOrUndefined(y)}</span>
+    )
   }
+};
 
+function valueOrUndefined(x) {
+  return (<code>{x == undefined ? 'undefined' : x}</code>);
+}
+
+function resultToString(result) {
+  return ASSERTION_ERROR_MAPS[result.assertion].apply(null, result.args);
+}
+
+export default class CodeResults extends React.Component {
+  renderResult(result) {
+    const cssClass = 'list-group-item list-group-item-' + (result.passed ? 'success' : 'danger');
+
+    const [actual, expected] = result.args;
+
+    return (
+      <li key={JSON.stringify(result)} className={cssClass}>
+        { resultToString(result) }
+        <span className="badge">
+          { result.passed === true ? 'Success! ' : 'Failure! ' }
+        </span>
+      </li>
+    )
+  }
   renderResults() {
-    return this.renderArray(this.props.results.passed, true).concat(this.renderArray(this.props.results.failed, false));
+    return this.props.results.map(this.renderResult.bind(this));
   }
   render() {
     if (!this.props.results) return null;
