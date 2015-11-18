@@ -4,6 +4,4 @@ var test = function(data) {
   return x;
 }
 
-var result = {
-  value: test({ x: 1 }),
-}
+assertEqual(2, test({ x: 1 }));
