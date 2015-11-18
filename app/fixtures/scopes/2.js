@@ -2,6 +2,4 @@ if (true) {
   let a = 2;
 }
 
-var result = {
-  value: a
-};
+assertEqual(a, 2);

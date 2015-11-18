@@ -1,7 +1,5 @@
 const name = 'Bob';
 
-const result = {
-  name: `Hey, my name is ${name}`
-}
+assertEqual('Hey, my name is Jack', `Hey, my name is ${name}`);
 
 
