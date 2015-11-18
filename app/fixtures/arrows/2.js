@@ -5,6 +5,4 @@ let doubled = numbers.map(function(x) {
   return x * 2;
 });
 
-const result = {
-  numbers: doubled.join(', ')
-}
+assertEqual(doubled.join(', '), '1, 4, 6, 7');
