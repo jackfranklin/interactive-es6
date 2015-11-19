@@ -30,7 +30,6 @@ export default [
   {
     index: 4,
     title: 'We can edit certain constants',
-    hasResults: true,
     content: (
       <div>
         <p>When a constant is an object, you can modify its values, but you can't redefine the entire object.</p>

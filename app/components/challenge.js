@@ -71,21 +71,18 @@ export default class Challenge extends React.Component {
   evaluateCode(e) {
     e.preventDefault();
     Evaluator.run(this.state.src).then((results) => {
-      // TODO: messy
-      // better if the evaluator threw on an error
-      if (results[0].error) {
-        const { errorType, message } = results[0];
-        this.setState({
-          codeError: `${errorType}: ${message}`,
-          evaluationLogResults: this.state.evaluationLogResults.concat([results]),
-        });
-      } else {
-        this.setState({
-          evalResults: results,
-          evaluationLogResults: this.state.evaluationLogResults.concat([results])
-        });
-      }
+      this.setState({
+        evalResults: results,
+        evaluationLogResults: this.state.evaluationLogResults.concat([results])
+      });
 
+      this.logActivity(results);
+    }).catch((results) => {
+      const { errorType, message } = results[0];
+      this.setState({
+        codeError: `${errorType}: ${message}`,
+        evaluationLogResults: this.state.evaluationLogResults.concat([results]),
+      });
       this.logActivity(results);
     });
   }
