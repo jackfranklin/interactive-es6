@@ -60,9 +60,8 @@ class App extends React.Component {
 
   nameSet() {
     this.setState({ hasName: true });
-    console.log('I GOT CALLED');
-
   }
+
   render() {
     return (
       <div>
@@ -94,22 +93,30 @@ class App extends React.Component {
   }
 }
 
-render(
-  (
-    <Router onUpdate={() => window.scrollTo(0, 0)}>
-      <Route path="" component={App}>
-        <Route path="/" component={Index}></Route>
-        <Route path="/_dashboard" component={Dashboard}></Route>
-        <Route path="/scopes" component={Scopes}></Route>
-        <Route path="/destructuring" component={Destructuring}></Route>
-        <Route path="/classes" component={Classes}></Route>
-        <Route path="/functions" component={Functions}></Route>
-        <Route path="/arrows" component={Arrows}></Route>
-        <Route path="/template-strings" component={TemplateStrings}></Route>
-        <Route path="/promises" component={Promises}></Route>
-        <Route path="/finished" component={Finished}></Route>
-      </Route>
-    </Router>
-  ),
-  document.getElementById('app')
-);
+class ForceReRender extends React.Component {
+  componentWillMount() {
+    // to work with jspm-live-reload
+    this.forceUpdate();
+  }
+
+  render() {
+    return (
+      <Router onUpdate={() => window.scrollTo(0, 0)}>
+        <Route path="" component={App}>
+          <Route path="/" component={Index}></Route>
+          <Route path="/_dashboard" component={Dashboard}></Route>
+          <Route path="/scopes" component={Scopes}></Route>
+          <Route path="/destructuring" component={Destructuring}></Route>
+          <Route path="/classes" component={Classes}></Route>
+          <Route path="/functions" component={Functions}></Route>
+          <Route path="/arrows" component={Arrows}></Route>
+          <Route path="/template-strings" component={TemplateStrings}></Route>
+          <Route path="/promises" component={Promises}></Route>
+          <Route path="/finished" component={Finished}></Route>
+        </Route>
+      </Router>
+    )
+  }
+}
+
+render(<ForceReRender />, document.getElementById('app'));
