@@ -20,6 +20,7 @@ export default class Dashboard extends React.Component {
     });
 
     activityChannel.bind('client-new-activity', (data) => {
+      console.log('got new activity', data);
       this.setState({ activity: this.state.activity.concat([data]) });
     });
   }
@@ -56,11 +57,10 @@ export default class Dashboard extends React.Component {
   }
 
   renderActivity() {
-    return this.state.activity.map((activity) => {
-      const wasSuccess = activity.res.error != true && activity.res.failed.length === 0;
+    return this.state.activity.map((activity, index) => {
+      const wasSuccess = activity.res.error != true && activity.res.some((a) => a.passed === false);
       return (
-        <tr key={JSON.stringify(activity.res)+activity.user}>
-          <td>{activity.user}</td>
+        <tr key={JSON.stringify(activity)+index}>
           <td>{activity.challenge}</td>
           <td>{ wasSuccess ? 'Success!' : 'Fail!' }</td>
         </tr>
@@ -84,7 +84,7 @@ export default class Dashboard extends React.Component {
         <h4>Activity Feed</h4>
         <table className="table table-striped">
           <thead>
-            <tr><th>Name</th><th>Challenge</th><th>Result</th></tr>
+            <tr><th>Challenge</th><th>Result</th></tr>
           </thead>
           <tbody>
             { this.renderActivity() }
