@@ -14,7 +14,7 @@
     "chokidar-socket-emitter": "^0.3.0",
     "html-dist": "^0.1.0",
     "http-server": "^0.8.5",
-    "jspm": "^0.16.14",
+    "jspm": "^0.16.14"
   },
   "jspm": {
     "dependencies": {
