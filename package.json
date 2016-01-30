@@ -20,7 +20,7 @@
     "dependencies": {
       "capaj/jspm-hot-reloader": "github:capaj/jspm-hot-reloader@^0.4.2",
       "css": "github:systemjs/plugin-css@^0.1.19",
-      "ecmascript-evaluator": "npm:ecmascript-evaluator@^0.0.3",
+      "ecmascript-evaluator": "npm:ecmascript-evaluator@^0.0.6",
       "fetch": "npm:whatwg-fetch@^0.10.1",
       "react": "npm:react@^0.14.2",
       "react-codemirror": "npm:react-codemirror@^0.2.0",
