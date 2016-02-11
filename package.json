@@ -12,7 +12,7 @@
   "devDependencies": {
     "cheerio": "^0.19.0",
     "chokidar-socket-emitter": "^0.3.0",
-    "html-dist": "^0.1.0",
+    "html-dist": "^0.2.2",
     "http-server": "^0.8.5",
     "jspm": "^0.16.14"
   },
