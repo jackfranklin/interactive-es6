@@ -8,6 +8,4 @@ build:
 	cp config.js dist
 	cp -r app/features dist/app
 	cp -r app/fixtures dist/app
-	cp index.html dist/index.html
-
-	./node_modules/.bin/babel-node build-html.js
+	./node_modules/.bin/html-dist --config html-dist.config.js --input index.html
