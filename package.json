@@ -18,7 +18,7 @@
   },
   "jspm": {
     "dependencies": {
-      "capaj/jspm-hot-reloader": "github:capaj/jspm-hot-reloader@^0.4.2",
+      "capaj/jspm-hot-reloader": "github:capaj/systemjs-hot-reloader?access_token=dec23d9e4fee8dc34046b93063d8577a162f117a@^0.4.2",
       "css": "github:systemjs/plugin-css@^0.1.19",
       "ecmascript-evaluator": "npm:ecmascript-evaluator@^0.0.6",
       "fetch": "npm:whatwg-fetch@^0.10.1",
