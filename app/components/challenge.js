@@ -46,6 +46,7 @@ export default class Challenge extends React.Component {
     this.setFixtureFromStorageOrDefault();
 
     if (this.props.results) {
+      // TODO: wtf is this for?
       // System.import(`app/results/${this.props.results}`).then((data) => {
       //   this.updateResults(data.result);
       // });
